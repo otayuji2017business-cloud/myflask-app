@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>ユーザー編集</h2>
+
+    <form method="post">
+        <input
+            name="username"
+            value="{{ user[1] }}"
+            required
+        >
+        <button>更新</button>
+    </form>
+
+    <a href="{{ url_for('list_users') }}">戻る</a>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}トップページ{% endblock %}
+
+{% block content %}
+    <h1>Hello {{ user }}</h1>
+    <p>年齢：{{ age }}</p>
+
+    <p>HTML テンプレートが表示されています。</p>
+    <p>Jinja2 で変数を表示しています。</p>
+
+    <a href="/about">Aboutへ</a><br>
+    <a href="/sum">sumsum</a>
+
+{% endblock %}
