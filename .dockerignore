@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+
+# 仮想環境
+venv/
+.venv/
+myflask-W4A_2pVf/
+
+# DB
+*.db
+
+# 環境変数
+.env
+
+# --- OS ---
+.DS_Store
+Thumbs.db

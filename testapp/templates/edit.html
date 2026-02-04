@@ -1,15 +1,12 @@
 {% extends "base.html" %}
+
 {% block content %}
-    <h2>ユーザー編集</h2>
+    <h2>Edit User</h2>
 
     <form method="post">
-        <input
-            name="username"
-            value="{{ user[1] }}"
-            required
-        >
-        <button>更新</button>
+        <input type="text" name="name" value="{{ user.name }}">
+        <button type="submit">Update</button>
     </form>
 
-    <a href="{{ url_for('list_users') }}">戻る</a>
+    <a href="{{ url_for('index') }}">Homeへ</a>
 {% endblock %}

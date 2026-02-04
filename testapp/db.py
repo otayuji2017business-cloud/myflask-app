@@ -1,3 +1,6 @@
+#SQLAlchemy 採用により使わなくなった
+
+
 import sqlite3
 
 DB_NAME = "data.db"
