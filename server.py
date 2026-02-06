@@ -1,9 +1,9 @@
-# Cloud Run では gunicorn から起動されるため
-# 通常はこの if __name__ == "__main__" は実行されませんが
-# ローカル実行用に残しておくのが正解です
-
 import os
 from testapp import app, db   # ← 既存の Flask app を使う（作らない）
+
+# ★ ここが重要：アプリ起動時にテーブル作成
+with app.app_context():
+    db.create_all()
 
 if __name__ == "__main__":
     # Cloud Run は PORT 環境変数でポートを指定してくる
