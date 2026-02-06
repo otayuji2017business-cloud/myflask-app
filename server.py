@@ -1,9 +1,7 @@
 import os
-from testapp import app, db   # ← 既存の Flask app を使う（作らない）
+from testapp import create_app
 
-# ★ ここが重要：アプリ起動時にテーブル作成
-with app.app_context():
-    db.create_all()
+app = create_app()
 
 if __name__ == "__main__":
     # Cloud Run は PORT 環境変数でポートを指定してくる

@@ -1,5 +1,6 @@
 from flask import render_template, request, redirect, url_for
-from . import app, db
+from flask import current_app as app
+from . import db
 from .models import User
 
 
@@ -35,10 +36,13 @@ def form():
 
         if not name:
             return "名前を入力してください"
-
-        user = User(name=name)
-        db.session.add(user)
-        db.session.commit()
+        try:
+            user = User(name=name)
+            db.session.add(user)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            return f"DBエラーが発生しました: {e}"
 
         return redirect(url_for('list_users'))
 
