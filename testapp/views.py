@@ -1,7 +1,11 @@
 from flask import render_template, request, redirect, url_for
-from . import app , db
+from . import app, db
 from .models import User
 
+
+# -----------------------
+# トップページ
+# -----------------------
 @app.route('/')
 def index():
     user = "Taro"
@@ -12,18 +16,25 @@ def index():
         age=age
     )
 
+
+# -----------------------
+# Aboutページ
+# -----------------------
 @app.route('/about')
 def about():
     return render_template('about.html')
 
 
+# -----------------------
+# フォーム（登録）
+# -----------------------
 @app.route('/form', methods=['GET', 'POST'])
 def form():
     if request.method == 'POST':
         name = request.form.get('name')
 
         if not name:
-             return "名前を入力してください"
+            return "名前を入力してください"
 
         user = User(name=name)
         db.session.add(user)
@@ -34,30 +45,36 @@ def form():
     return render_template('form.html')
 
 
-@app.route("/edit/<int:user_id>", methods=["GET", "POST"])
-def edit(user_id):
-    user = User.query.get_or_404(user_id)
-
-    if request.method == "POST":
-        user.name = request.form["name"]
-        db.session.commit()
-        return redirect(url_for("list_users"))
-
-    return render_template("edit.html", user=user)
-
-
+# -----------------------
+# ユーザー一覧
+# -----------------------
 @app.route('/users')
 def list_users():
     users = User.query.all()
     return render_template('users.html', users=users)
 
 
-@app.route("/delete/<int:user_id>", methods=["POST"])
+# -----------------------
+# 編集
+# -----------------------
+@app.route('/edit/<int:user_id>', methods=['GET', 'POST'])
+def edit(user_id):
+    user = User.query.get_or_404(user_id)
+
+    if request.method == 'POST':
+        user.name = request.form['name']
+        db.session.commit()
+        return redirect(url_for('list_users'))
+
+    return render_template('edit.html', user=user)
+
+
+# -----------------------
+# 削除
+# -----------------------
+@app.route('/delete/<int:user_id>', methods=['POST'])
 def delete(user_id):
     user = User.query.get_or_404(user_id)
     db.session.delete(user)
     db.session.commit()
-    return redirect(url_for("list_users"))
-
-
-
+    return redirect(url_for('list_users'))
