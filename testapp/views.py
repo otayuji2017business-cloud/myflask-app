@@ -8,8 +8,8 @@ from .models import User
 # -----------------------
 @app.route('/')
 def index():
-    user = "Taro"
-    age = 20
+    user = "まる"
+    age = 30
     return render_template(
         'index.html',
         user=user,
