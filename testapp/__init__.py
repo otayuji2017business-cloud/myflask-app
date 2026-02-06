@@ -17,9 +17,13 @@ app = Flask(__name__)
 # SECRET_KEY（Flask必須。簡易でOK）
 app.config['SECRET_KEY'] = 'dev-secret-key'
 
-# SQLite（学習用）
+# SQLite（学習用）→cloud SQLを入れます。
 # Cloud Run では永続化されないが、今はOK
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    "mysql+pymysql://flaskuser:PASSWORD@/myflaskdb"
+    "?unix_socket=/cloudsql/PROJECT_ID:asia-northeast1:INSTANCE_NAME"
+)
+
 
 # SQLAlchemyの警告を抑制
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
